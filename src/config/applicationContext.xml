@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+<!-- 数据源配置信息 -->
+	<!-- Bonecp Application-->
+	<import resource="applicationContext-bonecpdatasource.xml" />
+    
+	
+	<!-- C3P0 Application-->
+  <!--  <import resource="applicationContext-c3p0datasource.xml" />-->
+	<!-- 业务操作DAO注入 -->
+	<import resource="applicationContext-dataservice-business.xml" />
+</beans>

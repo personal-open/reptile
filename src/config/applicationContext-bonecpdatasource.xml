@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<!--此bean告诉Spring去哪找数据库的配置信息,因为有此Bean才出现下面用${}标记来取变量的语句 -->
+	<bean id="propertyConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/config/bonejdbc.properties</value>
+		</property>
+	</bean>
+
+	<!--配置一个数据源,根据上面propertyConfig指定的location去找数据库连接的配置信息 -->
+	<bean id="dataSource"
+		class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="idleConnectionTestPeriodInMinutes"  >
+		<value>${jdbc.onnectionTestPeriod}</value>
+		</property>
+		<property name="idleMaxAgeInMinutes" >
+		<value>${jdbc.maxAge}</value>
+		</property>
+		<property name="maxConnectionsPerPartition" >
+		<value>${jdbc.maxConnectionsPerPartition}</value>
+		</property>
+		<property name="minConnectionsPerPartition" >
+		<value>${jdbc.minConnectionsPerPartition}</value>
+		</property>
+		<property name="partitionCount" >
+		<value>${jdbc.partitionCount}</value>
+		</property>
+		<property name="acquireIncrement" >
+		<value>${jdbc.acquireIncrement}</value>
+		</property>
+		<property name="statementsCacheSize" >
+		<value>${jdbc.statementCacheSize}</value>
+		</property>
+		<property name="releaseHelperThreads">
+		<value>${jdbc.releaseHelperThreads}</value>
+		</property>
+	</bean>
+<!-- a PlatformTransactionManager is still required -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- (this dependency is defined somewhere else) -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!--根据dataSource和configLocation创建一个SqlMapClient -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/SqlMapConfig.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	<!--将上面的模版类织入到数据库操作DAO对象中 -->
+	<bean id="dataBaseDao" class="com.subject.database.utils.database.DataBaseDao">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient" />
+		</property>
+	</bean>
+	
+</beans>

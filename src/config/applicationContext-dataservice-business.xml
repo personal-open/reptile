@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--
+	author:ldl
+	time:2012-7-25
+	version:1.0 
+ -->
+<!-- 外部调用数据操作类DAO注入业务操作DAO中 -->
+	<bean id="reptileDao" class="com.subject.database.utils.dao.ReptileDao">
+		<property name="dataBaseDao">
+			<ref bean="dataBaseDao"/>
+		</property>
+	</bean>
+	
+	<!-- 外部调用数据操作类DAO注入业务操作Action中 -->
+	<bean id="reptileAction" class="com.subject.database.utils.action.ReptileAction">
+		<property name="reptileDao">
+			<ref bean="reptileDao"/>
+		</property>
+	</bean>
+</beans>

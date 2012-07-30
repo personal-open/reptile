@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="reptileSqlMap">
+       
+    <!--
+    	功能说明:组装数据批量入库
+    	作者：ldl
+         日期：2012-09-28
+    -->
+       
+     
+     
+     <!--
+     	功能说明:分析后数据批量入库
+     	作者:ldl
+     	日期:2011-09-28
+      -->  
+   <insert id="insertBatchData" parameterClass="java.util.HashMap">
+           INSERT INTO REPTILE (URLIMAGE) VALUES (#URLIMAGE#)
+	</insert>
+    
+  
+    
+
+</sqlMap>
