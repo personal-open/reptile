@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.subject.reptile.common.PropertiesHelper;
-import com.subject.reptile.protocol.HttpResponse;
+import com.subject.reptile.protocol.HttpPostResponse;
 import com.subject.reptile.queue.dbmq.BdbQueue;
 import com.subject.reptile.threadtask.ThreadMonitor;
 
@@ -29,14 +29,19 @@ public class UrlDisposalThread extends ThreadMonitor{
 		super.period = Integer.valueOf(PropertiesHelper.getPorperties("urlperiod_DataQueue"));
 	}
 	
+	/**
+	 * run函数
+	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		// TODO Auto-geerated method stub
 		while(BdbQueue.queueIsEmpety()){
 			String url = BdbQueue.getMessage();
-			System.out.println("从url queue中获取消息 ：" +url);
-			HttpResponse httpResponse = new HttpResponse(url);
-			httpResponse.start();
+			if(url != null || !url.equals("")){
+				log.info("从带下载队列Bdb中获取下载连接  "+url);
+				HttpPostResponse httpResponse = new HttpPostResponse(url);
+				httpResponse.start();
+			}
 		}
 	}
 

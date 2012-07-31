@@ -29,17 +29,8 @@ public class ThreadTaskManager {
 	 * @param task ThreadMonitor 线程任务
 	 */
 	public static void runTaskThread(ThreadMonitor task) {
-//			try {
-				final ScheduledFuture<?> commandHandle = taskThread.scheduleWithFixedDelay(task, task.getInitialDelay(),task.getPeriod(),TimeUnit.SECONDS);
-//			} catch (Exception e) {
-//				taskThread.shutdown();
-//				throw new UnsupportedOperationException("Thread exception!"+ e.getMessage());
-//			}
+		final ScheduledFuture<?> data = taskThread.scheduleWithFixedDelay(task, task.getInitialDelay(),task.getPeriod(),TimeUnit.SECONDS);
 	}
-	
-	
-	
-	
 	
 	
 	/**
@@ -47,12 +38,7 @@ public class ThreadTaskManager {
 	 * @param task ThreadMonitor 线程任务
 	 */
 	public static void runUrlTaskThread(ThreadMonitor task) {
-//			try {
-				final ScheduledFuture<?> commandHandle = taskThread.scheduleWithFixedDelay(task, task.getInitialDelay(),task.getPeriod(),TimeUnit.SECONDS);
-//			} catch (Exception e) {
-//				taskThread.shutdown();
-//				throw new UnsupportedOperationException("Thread exception!"+ e.getMessage());
-//			}
+		final ScheduledFuture<?> url = taskThread.scheduleWithFixedDelay(task, task.getInitialDelay(),task.getPeriod(),TimeUnit.SECONDS);
 	}
 	
 	/**

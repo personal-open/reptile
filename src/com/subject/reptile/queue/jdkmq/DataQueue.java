@@ -51,6 +51,7 @@ public class DataQueue {
 	 * @return boolean
 	 */
 	public static boolean queueIsEmpty(){
+		//log.info("image queue 大小为 ：" + queue.size());
 		if(queue.isEmpty()){
 			return false; 
 		}

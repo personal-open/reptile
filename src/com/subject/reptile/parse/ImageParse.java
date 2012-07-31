@@ -26,43 +26,38 @@ public class ImageParse extends AbstractParse{
 	/**
 	 * html原文
 	 */
-	public String html;
+	private String html;
+	
+	/**
+	 * url连接
+	 */
+	private String url;
 	
 	/**
 	 * 构造函数
 	 * @param _html String 抓取后的html原文
+	 * @param _url String url连接
 	 */
-	public ImageParse(String _html){
+	public ImageParse(String _html,String _url){
 		this.html = _html;
+		this.url = _url;
 	}
 	
-	/**
-	 * 图片解析函数
-	 * @param html String html原文
-	 */
-	public void parseImageUrl(String html){
-		Document doc = Jsoup.parse(html);
-		Elements imgs  = doc.getElementsByTag("img");
-		for (Element png : imgs) {
-			System.out.println(png.attr("src") + " : " + png.attr("alt"));
-		}
-	}
-
 	/**
 	 * run函数
 	 */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Document doc = super.getDocument(html);
+		Document doc = Jsoup.parse(html,url);
 		Elements imgs  = doc.getElementsByTag("img");
 		for (Element png : imgs) {
-			String srcUrl = png.attr("src");
+			String srcUrl = png.attr("abs:src");
 			String alt = png.attr("alt"); 
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("URLIMAGE",srcUrl);
-			System.out.println("向入库queue中放入消息"+png.attr("src") + " : " + png.attr("alt"));
-			DataQueue.addQueueMessage(map);
+			log.info("向入库queue中放入入库信息  "+srcUrl + " : " + alt);
+			//DataQueue.addQueueMessage(map);
 		}
 	}
 	

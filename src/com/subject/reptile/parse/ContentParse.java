@@ -18,35 +18,27 @@ public class ContentParse extends AbstractParse{
 	 */
 	private String html;
 	
+	/**
+	 * url连接
+	 */
+	private String url;
 	
 	/**
 	 * 构造函数
 	 * @param _html String html原文
 	 */
-	public ContentParse(String _html){
+	public ContentParse(String _html,String _url){
 		this.html = _html;
+		this.url = _url;
 	}
 	
-	/**
-	 * 内容解析函数
-	 * @param html String 抓取后的html原文
-	 */
-	public void parseContent(String html){
-		Document doc = Jsoup.parse(html);
-		Elements imgs  = doc.getElementsByTag("img");
-		for (Element png : imgs) {
-			System.out.println(png.attr("src") + " : " + png.attr("alt"));
-		}
-		
-	}
-
 	/**
 	 * run函数
 	 */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Document doc = super.getDocument(html);
+		Document doc = super.getDocument(html,url);
 		Elements imgs  = doc.getElementsByTag("img");
 		for (Element png : imgs) {
 			System.out.println(png.attr("src") + " : " + png.attr("alt"));

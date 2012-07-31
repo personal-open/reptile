@@ -6,7 +6,7 @@ import java.util.Map;
 import com.subject.database.utils.init.InitSpring;
 import com.subject.reptile.queue.jdkmq.DataQueue;
 import com.subject.reptile.threadtask.ThreadTaskManager;
-import com.subject.reptile.threadtask.queuedisposal.DataDisposalThread;
+import com.subject.reptile.threadtask.queuedisposal.ImgDisposalThread;
 
 public class DataQueueTest {
 
@@ -22,7 +22,7 @@ public class DataQueueTest {
 	 * 初始化数据mq线程任务
 	 */
 	public static void initDataMqThreadTask(){
-		DataDisposalThread eventRunQueue = new DataDisposalThread();
+		ImgDisposalThread eventRunQueue = new ImgDisposalThread();
 		ThreadTaskManager.runTaskThread(eventRunQueue);
 	}
 	

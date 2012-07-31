@@ -2,6 +2,9 @@ package com.subject.reptile.crawl;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 根url缓存操作函数
  * @author ldl
@@ -9,6 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * 2012-07-30
  */
 public class UrlContext {
+	
+	/**
+	 * log日志
+	 */
+	private static Log log = LogFactory.getLog(UrlContext.class);
 
 	/**
 	 * 保存根url及抓取深度
@@ -50,7 +58,7 @@ public class UrlContext {
 	 * @return boolean
 	 */
 	public static boolean isContentUrl(String url){
-		if(map.contains(url)){
+		if(map.containsKey(url)){
 			return true;
 		}
 		return false;

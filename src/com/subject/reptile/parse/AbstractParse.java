@@ -16,8 +16,8 @@ public abstract class AbstractParse extends Thread{
 	 * @param html String html原文
 	 * @return Document
 	 */
-	protected Document getDocument(String html){
-		Document doc = Jsoup.parse(html);
+	protected Document getDocument(String html,String url){
+		Document doc = Jsoup.parse(html,url);
 		return doc;
 	}
 

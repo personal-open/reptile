@@ -32,14 +32,18 @@ public class BdbQueue {
 	 * @param message
 	 */
 	public static void addMessage(String message){
-		
-		if(UrlContext.isContentUrl(message)){
-			if(!BloomFilter.contains(message)){
-				BloomFilter.aadUrl(message);
-				queue.add(message);
+		if(message != null || !message.equals("")){
+			if(UrlContext.isStartUrl(message)){
+				if(!BloomFilter.contains(message)){
+					BloomFilter.aadUrl(message);
+					log.info("向队列中放入url "+message);
+					queue.add(message);
+				}else{
+					log.info("url " + message +"已经抓取过==============================");
+				}
+			}else{
+				log.info("Url : " + message + " 不在设置抓取url根范围内");
 			}
-		}else{
-			log.info("Url : " + message + " 不在设置抓取url根范围内");
 		}
 	}
 	
@@ -59,6 +63,7 @@ public class BdbQueue {
 	 * @return boolean
 	 */
 	public static boolean queueIsEmpety(){
+		//log.info("url  queue 中的队列大小为："+queue.size());
 		if(queue.isEmpty()){
 			return false;
 		}

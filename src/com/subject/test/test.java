@@ -1,5 +1,7 @@
 package com.subject.test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +25,12 @@ public class test {
 		
 		
 		
-	    System.out.println(getDomain("http://www.baidu.com"));
+	 //   System.out.println(getDomain("http://www.baidu.com"));
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("http://nanjing.mallog.com.cn", "http://nanjing.mallog.com.cn");
+		
+		String s = "http://nanjing.mallog.com.cn";
 		
 		
 		

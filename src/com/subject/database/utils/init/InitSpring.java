@@ -29,7 +29,7 @@ public class InitSpring {
 	 */
 	public static void initialization(){
 		context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
-		log.error("初始化Spring");
+		log.info("spring environment initialization complete");
 	}
 	
 	/**
